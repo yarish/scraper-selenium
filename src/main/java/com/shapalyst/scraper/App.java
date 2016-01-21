@@ -1,4 +1,4 @@
-package com.shapalyst.scraper_selinium;
+package com.shapalyst.scraper;
 
 import java.util.concurrent.TimeUnit;
 
