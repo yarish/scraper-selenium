@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class App {
@@ -22,67 +24,72 @@ public class App {
 
     try {
       driver = new FirefoxDriver();
-
-      // Go to the given product url
-      String baseUrl = "https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640";
-      String cartUlr = "https://www.shoppersstop.com/cart";
       int DEFAULT_TIMEOUT_IN_SECONDS = 5;
       driver.manage().timeouts().implicitlyWait(DEFAULT_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS);
 
+      // Go to the given product url
+      // String baseUrl =
+      // "https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640";
+      String baseUrl =
+          "https://www.shoppersstop.com/demarca-women-bember-and-georgette-saree/p-200355834?PageSpeed=noscript";
+      String cartUlr = "https://www.shoppersstop.com/cart";
       driver.get(baseUrl);
-      System.out.println("opening the baseUrl=" + baseUrl);
+      System.out.println("\n(1)Visiting the given product url :\n" + baseUrl);
       clearPopUpAdvertisement(driver);
 
-      // Click on small Size
-      WebDriverWait wait = new WebDriverWait(driver, 2);
-      driver.findElement(By.xpath("(//a[contains(text(),'M')])[24]")).click();
-      System.out.println("Clicked on Medium size icon");
+      // scrape product name
+      WebElement productDescriptionElement =
+          driver.findElement(By.cssSelector(".product_description > h1:nth-child(2)"));
+      String productDescription = productDescriptionElement.getText();
+      System.out.println("\nouter html=" + productDescriptionElement.getAttribute("outerHTML"));
+      System.out.println("\n(2) scraped productDescription=" + productDescription);
+
+      // Click on medium Size else leave it to default
+      // if (driver.findElements(By.xpath("(//a[contains(text(),'M')])[24]")).size() != 0) {
+      // driver.findElement(By.xpath("(//a[contains(text(),'M')])[24]")).click();
+      // System.out.println("Clicked on Medium size icon");
+      // } else {
+      // System.out.println("Medium size is not available - leave it as default ");
+      // }
+
+      System.out.println("\n(3)Default size is selelcted  ");
 
       // Click on add to cart
       clearPopUpAdvertisement(driver);
-      // wait.until(ExpectedConditions.elementToBeClickable(By
-      // .cssSelector("div.AddToCart-AddToCartAction > #addToCartForm > #addToCartButton")));
       driver.findElement(By.cssSelector("div.AddToCart-AddToCartAction > #addToCartForm > #addToCartButton")).click();
-      System.out.println("Clicked on Add to Cart button");
+      System.out.println("\n(4)Clicked on Add to Cart button");
 
       // click on view bag
       clearPopUpAdvertisement(driver);
-
-      // wait.until(ExpectedConditions.elementToBeClickable(By.id("minicart_id")));
-      // driver.findElement(By.id("minicart_id")).click();
-      // driver.findElement(By.linkText("View Bag")).click();
+      System.out.println("\n(5)Visiting to Cart page");
       driver.get(cartUlr);
 
-      Thread.sleep(5 * 1000);
+      // check weather the added product is available in shopping cart
+      WebElement addedProuctInTheCartElement = driver.findElement(By.cssSelector(".pro-name > a:nth-child(1)"));
+      String addedProuctInTheCart = addedProuctInTheCartElement.getText();
+      System.out.println("\nouter html=" + addedProuctInTheCartElement.getAttribute("outerHTML"));
+      System.out.println("\n(6) scraped addedProuctInTheCart=" + productDescription);
+      System.out.println("\n===============================================");
+      System.out.println("\n(7)Print cart page source =" + driver.getPageSource());
+      System.out.println("\n===============================================");
+
+      if (productDescription.equalsIgnoreCase(addedProuctInTheCart)) {
+        System.out.println("\n(8)Product is added successfully into the shopping cart!");
+        System.out.println("\n means step(2) and step(6) values are same! ");
+      }
+
       driver.quit();
-      System.out.println("exit from selenium driver");
+      System.out.println("\n(9)Quit the Firefox driver! ");
       return true;
 
     } catch (NoSuchElementException nsee) {
-      System.out.println("site navigation or element has changed " + nsee);
+      System.out.println("(-1)ERROR: site navigation or element has changed " + nsee);
       return false;
     }
 
   }
 
-
   private void clearPopUpAdvertisement(WebDriver driver) {
-
-    // if
-    // (driver.findElements(By.cssSelector("#webklipper-publisher-widget-container-notification-close-div > span > i"))
-    // .size() != 0) {
-    // driver.findElement(By.cssSelector("#webklipper-publisher-widget-container-notification-close-div > span > i"))
-    // .click();
-    // driver.switchTo().activeElement().clear();
-    // }
-    //
-    // if (driver.findElements(By.cssSelector("#\\~b05bc807")).size() != 0) {
-    // driver.findElement(By.cssSelector("#\\~b05bc807")).click();
-    // driver.get(baseUrl);
-    // }
-
-    // driver.get("https://www.shoppersstop.com/discount-promotions");
-    // driver.get(baseUrl);
 
     try {
       driver.switchTo().frame("webklipper-publisher-widget-container-notification-frame");
@@ -91,19 +98,12 @@ public class App {
           By.cssSelector("#webklipper-publisher-widget-container-notification-close-div > span > i")).size() != 0) {
         driver.findElement(By.cssSelector("#webklipper-publisher-widget-container-notification-close-div > span > i"))
             .click();
-        // driver.switchTo().activeElement().clear();
       }
-
-      // driver.findElement(By.xpath("//a[@id='webklipper-publisher-widget-container-notification-close-div']/span/i")).click();
-
       driver.switchTo().defaultContent();
     } catch (NoSuchFrameException nsfe) {
-      // ok no issues
+      // ok no issues - as long as promotion adv does not come I am happy !
       ;
     }
 
-
   }
-
-
 }
