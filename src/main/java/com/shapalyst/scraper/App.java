@@ -15,12 +15,20 @@ public class App {
   private WebDriver driver;
 
   public static void main(String[] args) throws InterruptedException {
+    
+    if(args.length != 1){
+      System.out.println("please pass the product URL which needs to be added into shopping cart !");
+      System.out.println("Usage : java -jar scraper-selenium-jar-with-dependencies.jar <URL> ");
+      return ;
+    }
+    
+    String productURL = args[0];
     App app = new App();
-    boolean isScrapeSuccess = app.scrape();
+    boolean isScrapeSuccess = app.scrape(productURL);
     System.out.println("isScrapeSuccess=" + isScrapeSuccess);
   }
 
-  private boolean scrape() throws InterruptedException {
+  private boolean scrape(String productURL) throws InterruptedException {
 
     try {
       driver = new FirefoxDriver();
@@ -33,7 +41,7 @@ public class App {
       String baseUrl =
           "https://www.shoppersstop.com/demarca-women-bember-and-georgette-saree/p-200355834?PageSpeed=noscript";
       String cartUlr = "https://www.shoppersstop.com/cart";
-      driver.get(baseUrl);
+      driver.get(productURL);
       System.out.println("\n(1)Visiting the given product url :\n" + baseUrl);
       clearPopUpAdvertisement(driver);
 
