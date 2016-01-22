@@ -27,3 +27,12 @@ $ java -jar scraper-selenium-jar-with-dependencies.jar <URL></br>
 </p>
 </body>
 </html>
+
+
+Test cases :
+1) missing URL param in the command line 
+2) whether URL is valid ?
+3) product does not exists anymore ! 
+4) annoying popup comes - advertisements / promos !!
+5) 
+

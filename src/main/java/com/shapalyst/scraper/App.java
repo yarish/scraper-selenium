@@ -2,11 +2,13 @@ package com.shapalyst.scraper;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.validator.UrlValidator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,14 +17,14 @@ public class App {
   private WebDriver driver;
 
   public static void main(String[] args) throws InterruptedException {
-    
-    if(args.length != 1){
+
+    if (args.length != 1) {
       System.out.println("please pass the product URL which needs to be added into shopping cart !");
       System.out.println("Usage : java -jar scraper-selenium-jar-with-dependencies.jar <URL> ");
-      return ;
+      return;
     }
-    
     String productURL = args[0];
+
     App app = new App();
     boolean isScrapeSuccess = app.scrape(productURL);
     System.out.println("isScrapeSuccess=" + isScrapeSuccess);
@@ -30,25 +32,50 @@ public class App {
 
   private boolean scrape(String productURL) throws InterruptedException {
 
+
+    // Check whether the given product URL is valid
+    UrlValidator urlValidator = new UrlValidator();
+    // valid URL
+    if (urlValidator.isValid(productURL)) {
+      // System.out.println("productURL is valid");
+      System.out.println("\n(0)productURL is valid :\n" + productURL);
+    } else {
+      System.out.println("\n(0)productURL is invalid :\n" + productURL);
+      return false;
+    }
+
+
     try {
       driver = new FirefoxDriver();
-      int DEFAULT_TIMEOUT_IN_SECONDS = 5;
+      // driver = new ChromeDriver();
+
+      int DEFAULT_TIMEOUT_IN_SECONDS = 60;
       driver.manage().timeouts().implicitlyWait(DEFAULT_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS);
 
-      // Go to the given product url
-      // String baseUrl =
-      // "https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640";
-      String baseUrl =
-          "https://www.shoppersstop.com/demarca-women-bember-and-georgette-saree/p-200355834?PageSpeed=noscript";
       String cartUlr = "https://www.shoppersstop.com/cart";
       driver.get(productURL);
-      System.out.println("\n(1)Visiting the given product url :\n" + baseUrl);
+      System.out.println("\n(1)Visiting the given product url :\n" + productURL);
       clearPopUpAdvertisement(driver);
+
+      // check for the product does not exists error
+      if (driver.findElements(By.cssSelector("body > main > section > div.error-content > div.content > h2")).size() != 0) {
+        WebElement productDoesnotExistH2Element =
+            driver.findElement(By.cssSelector("body > main > section > div.error-content > div.content > h2"));
+        String productDoesnotExistH2Text = productDoesnotExistH2Element.getAttribute("innerHTML");
+        System.out.println("\nouter html=" + productDoesnotExistH2Element.getAttribute("outerHTML"));
+        System.out.println("\n(2) scraped productDoesnotExistH2Text=" + productDoesnotExistH2Text);
+        if (productDoesnotExistH2Text.equalsIgnoreCase("OOOPS! The page which you are looking for can’t be found!")) {
+          System.out.println("OOOPS! The page which you are looking for can’t be found!");
+          return false;
+        }
+      }
 
       // scrape product name
       WebElement productDescriptionElement =
           driver.findElement(By.cssSelector(".product_description > h1:nth-child(2)"));
-      String productDescription = productDescriptionElement.getText();
+      // WebElement productDescriptionElement =
+      // driver.findElement(By.cssSelector("h1[itemprop='name']"));
+      String productDescription = productDescriptionElement.getAttribute("innerHTML");
       System.out.println("\nouter html=" + productDescriptionElement.getAttribute("outerHTML"));
       System.out.println("\n(2) scraped productDescription=" + productDescription);
 
@@ -64,7 +91,10 @@ public class App {
 
       // Click on add to cart
       clearPopUpAdvertisement(driver);
-      driver.findElement(By.cssSelector("div.AddToCart-AddToCartAction > #addToCartForm > #addToCartButton")).click();
+      WebElement AddToCartButton = driver.findElement(By.cssSelector("div.AddToCart-AddToCartAction > #addToCartForm > #addToCartButton"));
+      System.out.println("AddToCartButton.outerhtml="+AddToCartButton.getAttribute("outerHTML"));
+      AddToCartButton.submit();
+      //driver.findElement(By.cssSelector("input[id=addToCartButton][value='Add to bag']")).click();
       System.out.println("\n(4)Clicked on Add to Cart button");
 
       // click on view bag

@@ -17,7 +17,7 @@
 		<junit.version>4.11</junit.version>
 		<firefox.driver.version>2.49.0</firefox.driver.version>
 		<selenium.java.version>2.49.0</selenium.java.version>
-
+		<commons.validator.version>1.5.0</commons.validator.version>
 	</properties>
 
 	<dependencies>
@@ -46,6 +46,13 @@
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.java.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-validator</groupId>
+			<artifactId>commons-validator</artifactId>
+			<version>${commons.validator.version}</version>
+		</dependency>
+
 
 	</dependencies>
 
