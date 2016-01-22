@@ -17,7 +17,7 @@ I am using selenium for this implementation.</br>
 </p>
 
 
-<code>
+<p>
 1) checkout the code from github</br>
 $ pwd </br>
 /home/yarish</br>
@@ -26,6 +26,6 @@ $ cd scraper-selenium </br>
 $ mvn clean install</br>
 $ cd target </br>
 $ java -jar scraper-selenium-jar-with-dependencies.jar <URL></br>
-</code>
+</p>
 </body>
 </html>
