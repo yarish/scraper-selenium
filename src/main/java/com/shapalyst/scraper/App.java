@@ -45,6 +45,7 @@ public class App {
       int DEFAULT_TIMEOUT_IN_SECONDS = 5;
       driver.manage().timeouts().implicitlyWait(DEFAULT_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS);
 
+      System.out.println("\nDEFAULT_TIMEOUT_IN_SECONDS:" + DEFAULT_TIMEOUT_IN_SECONDS);
       String cartUlr = "https://www.shoppersstop.com/cart";
       driver.get(productURL);
       System.out.println("\n(1)Visiting the given product url :\n" + productURL);

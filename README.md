@@ -18,8 +18,6 @@ I am using selenium for this implementation.</br>
 <p>
 <h3>Download / View Screencast from youtube </h3>
 
-
-<h3>compile from source </h3>
 Download runnable jar from google drive</br>
 https://goo.gl/ZoEoSz
 
@@ -28,6 +26,11 @@ Directly run from command line</br>
 <code>
 $ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640
 </code>
+</br>
+<code>
+$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/kaya-pigmentation-reducing-complex-get-rs-500-off-on-kaya-products-for-rs-2490-/p-9787102
+</code>
+</br>
 </br>
 download the last run log file
 https://goo.gl/vGvVyZ    
@@ -42,6 +45,9 @@ https://goo.gl/vGvVyZ
 <code>$ mvn clean install</code></br>
 <code>$ cd target </code></br>
 <code>$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640 </code> </br>
+<code>
+$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/kaya-pigmentation-reducing-complex-get-rs-500-off-on-kaya-products-for-rs-2490-/p-9787102
+</code></br>
 </p>
 
 
