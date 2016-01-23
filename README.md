@@ -17,9 +17,10 @@ I am using selenium for this implementation.</br>
 
 <p>
 <h3>Download / View Screencast from youtube </h3>
+https://youtu.be/jC06z8uRCJ0  </br> 
 
-Download runnable jar from google drive</br>
-https://goo.gl/ZoEoSz
+Download runnable jar and log files from google drive</br>
+https://goo.gl/MdXRBQ ,19.2 MB fat jar with all dependencies</br>
 
 </br>
 Directly run from command line</br>
@@ -41,6 +42,7 @@ https://goo.gl/vGvVyZ
 <code>$ pwd </code></br>
 /home/yarish</br>
 <code>$ git clone https://github.com/yarish/scraper-selenium.git</code></br>
+or directly download as zip https://github.com/yarish/scraper-selenium/archive/master.zip</br> 
 <code>$ cd scraper-selenium </code></br>
 <code>$ mvn clean install</code></br>
 <code>$ cd target </code></br>
@@ -57,7 +59,6 @@ Test cases handled :</br>
 2) whether URL is valid ?</br>
 3) what if the product does not exists anymore !</br> 
 4) annoying popup comes - advertisements / promos !!</br>
-5) </br>
 </p>
 </body>
 </html>
