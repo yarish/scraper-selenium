@@ -25,28 +25,30 @@ https://goo.gl/ZoEoSz
 
 </br>
 Directly run from command line</br>
+<code>
 $ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640
+</code>
 </br>
 download the last run log file
 https://goo.gl/vGvVyZ    
 
 <h3>compile from source </h3>
-<code>
+
 1) checkout the code from github</br>
-$ pwd </br>
+<code>$ pwd </code></br>
 /home/yarish</br>
-$ git clone https://github.com/yarish/scraper-selenium.git</br>
-$ cd scraper-selenium </br>
-$ mvn clean install</br>
-$ cd target </br>
-$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640  </code>
+<code>$ git clone https://github.com/yarish/scraper-selenium.git</code></br>
+<code>$ cd scraper-selenium </code></br>
+<code>$ mvn clean install</code></br>
+<code>$ cd target </code></br>
+<code>$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640 </code> </br>
 </p>
 
 
 <p>
-Test cases handled :
+Test cases handled :</br> 
 1) missing URL param in the command line </br> 
-2) whether URL is valid ?</br>v
+2) whether URL is valid ?</br>
 3) what if the product does not exists anymore !</br> 
 4) annoying popup comes - advertisements / promos !!</br>
 5) </br>
