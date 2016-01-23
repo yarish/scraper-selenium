@@ -24,15 +24,17 @@ $ cd scraper-selenium </br>
 $ mvn clean install</br>
 $ cd target </br>
 $ java -jar scraper-selenium-jar-with-dependencies.jar <URL></br>
+URL = https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640 
+</p>
+
+
+<p>
+Test cases :
+1) missing URL param in the command line</br> 
+2) whether URL is valid ?</br>v
+3) product does not exists anymore !</br> 
+4) annoying popup comes - advertisements / promos !!</br>
+5) </br>
 </p>
 </body>
 </html>
-
-
-Test cases :
-1) missing URL param in the command line 
-2) whether URL is valid ?
-3) product does not exists anymore ! 
-4) annoying popup comes - advertisements / promos !!
-5) 
-

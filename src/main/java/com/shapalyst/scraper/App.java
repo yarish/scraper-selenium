@@ -8,10 +8,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class App {
   private WebDriver driver;
@@ -32,24 +29,20 @@ public class App {
 
   private boolean scrape(String productURL) throws InterruptedException {
 
-
     // Check whether the given product URL is valid
     UrlValidator urlValidator = new UrlValidator();
     // valid URL
     if (urlValidator.isValid(productURL)) {
-      // System.out.println("productURL is valid");
       System.out.println("\n(0)productURL is valid :\n" + productURL);
     } else {
       System.out.println("\n(0)productURL is invalid :\n" + productURL);
       return false;
     }
 
-
     try {
       driver = new FirefoxDriver();
-      // driver = new ChromeDriver();
 
-      int DEFAULT_TIMEOUT_IN_SECONDS = 60;
+      int DEFAULT_TIMEOUT_IN_SECONDS = 5;
       driver.manage().timeouts().implicitlyWait(DEFAULT_TIMEOUT_IN_SECONDS, TimeUnit.SECONDS);
 
       String cartUlr = "https://www.shoppersstop.com/cart";
@@ -73,8 +66,6 @@ public class App {
       // scrape product name
       WebElement productDescriptionElement =
           driver.findElement(By.cssSelector(".product_description > h1:nth-child(2)"));
-      // WebElement productDescriptionElement =
-      // driver.findElement(By.cssSelector("h1[itemprop='name']"));
       String productDescription = productDescriptionElement.getAttribute("innerHTML");
       System.out.println("\nouter html=" + productDescriptionElement.getAttribute("outerHTML"));
       System.out.println("\n(2) scraped productDescription=" + productDescription);
@@ -91,10 +82,10 @@ public class App {
 
       // Click on add to cart
       clearPopUpAdvertisement(driver);
-      WebElement AddToCartButton = driver.findElement(By.cssSelector("div.AddToCart-AddToCartAction > #addToCartForm > #addToCartButton"));
-      System.out.println("AddToCartButton.outerhtml="+AddToCartButton.getAttribute("outerHTML"));
+      WebElement AddToCartButton =
+          driver.findElement(By.cssSelector("div.AddToCart-AddToCartAction > #addToCartForm > #addToCartButton"));
+      System.out.println("AddToCartButton.outerhtml=" + AddToCartButton.getAttribute("outerHTML"));
       AddToCartButton.submit();
-      //driver.findElement(By.cssSelector("input[id=addToCartButton][value='Add to bag']")).click();
       System.out.println("\n(4)Clicked on Add to Cart button");
 
       // click on view bag
