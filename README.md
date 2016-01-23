@@ -16,6 +16,22 @@ I am using selenium for this implementation.</br>
 
 
 <p>
+<h3>Download / View Screencast from youtube </h3>
+
+
+<h3>compile from source </h3>
+Download runnable jar from google drive</br>
+https://goo.gl/ZoEoSz
+
+</br>
+Directly run from command line</br>
+$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640
+</br>
+download the last run log file
+https://goo.gl/vGvVyZ    
+
+<h3>compile from source </h3>
+<code>
 1) checkout the code from github</br>
 $ pwd </br>
 /home/yarish</br>
@@ -23,16 +39,15 @@ $ git clone https://github.com/yarish/scraper-selenium.git</br>
 $ cd scraper-selenium </br>
 $ mvn clean install</br>
 $ cd target </br>
-$ java -jar scraper-selenium-jar-with-dependencies.jar <URL></br>
-URL = https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640 
+$ java -jar scraper-selenium-jar-with-dependencies.jar https://www.shoppersstop.com/haute-curry-women-cotton-anarkali-printed-churidar-suit/p-9758640  </code>
 </p>
 
 
 <p>
-Test cases :
-1) missing URL param in the command line</br> 
+Test cases handled :
+1) missing URL param in the command line </br> 
 2) whether URL is valid ?</br>v
-3) product does not exists anymore !</br> 
+3) what if the product does not exists anymore !</br> 
 4) annoying popup comes - advertisements / promos !!</br>
 5) </br>
 </p>
