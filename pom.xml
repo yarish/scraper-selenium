@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jdk.version>1.7</jdk.version>
 		<testng.version>6.5.1</testng.version>
-		<junit.version>4.11</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<firefox.driver.version>2.49.0</firefox.driver.version>
 		<selenium.java.version>2.49.0</selenium.java.version>
 		<commons.validator.version>1.5.0</commons.validator.version>
